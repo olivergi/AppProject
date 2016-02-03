@@ -360,87 +360,8 @@
 		}
 
 	};
-
-	// Pricing
-	var pricingAnimate = function() {
-
-		if ( $('#fh5co-pricing').length > 0 ) {	
-			$('#fh5co-pricing .to-animate').each(function( k ) {
-				
-				var el = $(this);
-				
-				setTimeout ( function () {
-					el.addClass('fadeInUp animated');
-				},  k * 200, 'easeInOutExpo' );
-				
-			});
-		}
-
-	};
-	var pricingWayPoint = function() {
-
-		if ( $('#fh5co-pricing').length > 0 ) {
-			$('#fh5co-pricing').waypoint( function( direction ) {
-										
-					setTimeout(function(){
-						$('.animate-pricing-1').addClass('animated fadeIn');
-					}, 200);
-					setTimeout(function(){
-						$('.animate-pricing-2').addClass('animated fadeIn');
-					}, 300);
-					setTimeout(pricingAnimate, 700);
-					
-					
-					$(this.element).addClass('animated');
-						
-			
-			} , { offset: '95%' } );
-		}
-
-	};
-
-	// Pricing
-	var pressAnimate = function() {
-
-		if ( $('#fh5co-press').length > 0 ) {	
-			$('#fh5co-press .to-animate').each(function( k ) {
-				
-				var el = $(this);
-				
-				setTimeout ( function () {
-					el.addClass('fadeInUp animated');
-				},  k * 200, 'easeInOutExpo' );
-				
-			});
-		}
-
-	};
-	var pressWayPoint = function() {
-
-		if ( $('#fh5co-press').length > 0 ) {
-			$('#fh5co-press').waypoint( function( direction ) {
-										
-					setTimeout(function(){
-						$('.animate-press-1').addClass('animated fadeIn');
-					}, 200);
-					setTimeout(function(){
-						$('.animate-press-2').addClass('animated fadeIn');
-					}, 300);
-					setTimeout(pressAnimate, 700);
-					
-					
-					$(this.element).addClass('animated');
-						
-			
-			} , { offset: '95%' } );
-		}
-
-	};
-
-
-	
-	
-
+    
+    
 	// Document on load.
 	$(function(){
 

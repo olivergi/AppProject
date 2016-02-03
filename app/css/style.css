@@ -23,6 +23,14 @@ body {
   position: relative;
 }
 
+audio{
+    width: 100%;
+}
+
+.imgTitle {
+    text-align: center;
+}
+
 .signup{
     width: 80%;
     right: 30%;
