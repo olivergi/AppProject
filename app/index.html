@@ -9,7 +9,6 @@
 	<title>Square </title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="" />
-	<meta name="keywords" content="html5, css3, mobile first, responsive" />
 	<meta name="author" content="Square" />
 
   <!-- Facebook and Twitter integration -->
@@ -82,7 +81,7 @@
 		    	</div>
 		    </div>
 			<!-- Background color here.  -->
-		    <div class="item" style="background: #44CC44;">
+		    <div class="item" style="background: #66CC66;">
 		    	<div class="container" style="position: relative;">
 		    		<div class="row">
 					    <div class="col-md-4 col-md-push-1 col-sm-4 col-sm-push-1">
@@ -93,9 +92,9 @@
 
 		    		</div>
 		    	</div>
-		    </div>
+		    </div> 
             <!-- Background color here.  -->
-		    <div class="item" style="background: #66CC66;">
+		   <!-- <div class="item" style="background: #66CC66;">
 		    	<div class="container" style="position: relative;">
 		    		<div class="row">
 		    			<div class="col-md-4 col-md-push-1 col-sm-4 col-sm-push-7">
@@ -105,65 +104,47 @@
 		    			</div>
 		    		</div>
 		    	</div>
-		    </div>
+		    </div> -->
 
 		</div>
 	</div>
         
         <!-- Modal -->
-    <!--   <div id="signUpModal" class="modal fade" role="dialog">
-                <div class="modal-dialog">
-                    
-                 Modal content
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title"><i class="icon-user"></i></h4>
-                      </div>
-                      <div class="modal-body">
-                        <input type="text" class="form-control" placeholder='Username'><br>
-                        <input type="text" class="form-control" placeholder='Password'><br>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Sign In</button>
-                      </div>
-                    </div>
-              </div>
-        </div> -->
-        
         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="loginCtrl">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span></button>
+                            
                 <h4 class="modal-title login" id="myModalLabel"><i class="icon-user"></i></h4>
                 <h4 class="modal-title registration" id="myModalLabel"><i class="icon-user"></i></h4>
                         </div>
-      <div class="modal-body">
-        <div id="login" class="login">
-           <form id="loginForm">
-             <input type="text" class="form-control" name="username"  id="lusername" value="" placeholder="Username" ><br>
-             <input type="password" class="form-control" name="password" id="lpassword" value="" placeholder="Password"><br>
-          </form>
-        </div>
-         <div id="register" class="registration">
-           <form id="registerForm">
-             <input type="text" class="form-control" name="username" value="" placeholder="Username" id="rusername"><br>
-             <input type="password" class="form-control" name="password" value="" placeholder="Password" id="rpassword"><br>
-             <input type="text" class="form-control" name="email" value="" placeholder="E-mail address" id="remail">
-          </form>
-        </div>
-      </div>
-      <div class="modal-footer">
-            <a href="#" class="login pull-left" id="regislink"> Don't have an account yet? Click here to register! </a>
-            <a href="#" class="registration pull-left" id="loginlink"> Already have an account? Sign in here! </a> 
-        <button  class="btn btn-default registration" ng-click="registerUser()" data-dismiss="modal">Register</button>
-        <button  class="btn btn-default login" ng-click="signIn()" data-dismiss="modal">Sign in</button>
-      </div>
-    </div>
-  </div>
-</div>
-        
+                  <div class="modal-body">
+                    <div id="login" class="login">
+                       <form id="loginForm">
+                         <input type="text" class="form-control" name="username"  id="lusername" value="" placeholder="Username" ><br>
+                         <input type="password" class="form-control" name="password" id="lpassword" value="" placeholder="Password"><br>
+                      </form>
+                    </div>
+                     <div id="register" class="registration">
+                       <form id="registerForm">
+                         <input type="text" class="form-control" name="username" value="" placeholder="Username" id="rusername"><br>
+                         <input type="password" class="form-control" name="password" value="" placeholder="Password" id="rpassword"><br>
+                         <input type="text" class="form-control" name="email" value="" placeholder="E-mail address" id="remail">
+                      </form>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                        <a href="#" class="login pull-left" id="regislink"> Don't have an account yet? Click here to register! </a>
+                        <a href="#" class="registration pull-left" id="loginlink"> Already have an account? Sign in here! </a> 
+                    <button  class="btn btn-default registration" ng-click="registerUser()" data-dismiss="modal">Register</button>
+                    <button  class="btn btn-default login" ng-click="signIn()" data-dismiss="modal">Sign in</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
         
         
         
@@ -181,11 +162,12 @@
                       </div>
                       <div class="modal-body">
                         <form id="uploadForm">
-                            <input type="text" class="form-control" name="title" maxlength="25" placeholder="Title" ><br>
+                            <input type="text" class="form-control" id="titleField" name="title" maxlength="25" placeholder="Title" ><br>
                             <input type="text" class="form-control" name="description" placeholder="Description"><br>
-                            <span class="btn btn-default btn-file">
-                                Browse... <input type="file" name="file" onchange="angular.element(this).scope().setMediaFile(this)">
+                            <span class="btn btn-default btn-file" id="fileBrowse">
+                                Browse... <input type="file" name="file" id="uploadBox" onchange="angular.element(this).scope().setMediaFile(this)">
                             </span>
+                                <i class="glyphicon glyphicon-ok" id="fileSelected"></i>
                             </br>
                         </form>
                       </div>
@@ -196,63 +178,60 @@
               </div>
         </div>
         
-        
-        
-	
- <!-- Gallery -->
-<div class="container-fluid"> 
-    <div class="container">
-        <div class="row">
-    <div class="col-md-12" id="gallery">
-        
+     <!-- Gallery -->
+    <div class="container-fluid"> 
+        <div class="container">
+            <div class="row">
+        <div class="col-md-12" id="gallery">
+
+                </div>
+                    <button type="button" class="btn btn-primary btn-block" ng-click="showMore()" id="showMore">Show More</button>
             </div>
-                <button type="button" class="btn btn-primary btn-block" ng-click="showMore()" id="showMore">Show More</button>
+
         </div>
-        
+
     </div>
-        
-</div>
 
-<!-- Footer Containing icons -->
-	<footer id="footer" role="contentinfo">
-		<div class="container">
-			<div class="row row-bottom-padded-sm">
-				<div class="col-md-12">
-					<p class="copyright text-center">&copy; 2016 <a href="index.html">Square</a>. All Rights Reserved. </p>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 text-center">
-					<ul class="social social-circle">
-						<li><a href="#"><i class="icon-twitter"></i></a></li>
-						<li><a href="#"><i class="icon-facebook"></i></a></li>
-						<li><a href="#"><i class="icon-youtube"></i></a></li>
-						<li><a href="#"><i class="icon-instagram"></i></a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</footer>
-
-	
-	<!-- jQuery -->
-    <script src="js/jquery-2.1.4.js"></script>
-	<!-- jQuery Easing -->
-	<script src="js/jquery.easing.1.3.js"></script>
-	<!-- Bootstrap -->
-	<script src="js/bootstrap.min.js"></script>
-	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
-	<!-- Owl Carousel -->
-	<script src="js/owl.carousel.min.js"></script>
-    <script src="angular-1.5.0-rc.1/angular.min.js"></script>
+    <!-- Footer Containing icons -->
+        <footer id="footer" role="contentinfo">
+            <div class="container">
+                <div class="row row-bottom-padded-sm">
+                    <div class="col-md-12">
+                        <p class="copyright text-center">&copy; 2016 <a href="index.html">Square</a>. All Rights Reserved. </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <ul class="social social-circle">
+                            <li><a href="#"><i class="icon-twitter"></i></a></li>
+                            <li><a href="#"><i class="icon-facebook"></i></a></li>
+                            <li><a href="#"><i class="icon-youtube"></i></a></li>
+                            <li><a href="#"><i class="icon-instagram"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
 
 
-	<!-- Main JS (Do not remove) -->
-	<script src="js/main.js"></script>
-    <script src="js/gallery.js"></script>
-    <script src="js/user.js"></script>
-    <script src="js/upload.js"></script>
+        <!-- jQuery -->
+        <script src="js/jquery-2.1.4.js"></script>
+        <!-- jQuery Easing -->
+        <script src="js/jquery.easing.1.3.js"></script>
+        <!-- Bootstrap -->
+        <script src="js/bootstrap.min.js"></script>
+        <!-- Waypoints -->
+        <script src="js/jquery.waypoints.min.js"></script>
+        <!-- Owl Carousel -->
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="angular-1.5.0-rc.1/angular.min.js"></script>
 
-	</body>
-</html>
+
+        <!-- Main JS (Do not remove) -->
+        <script src="js/main.js"></script>
+        <script src="js/gallery.js"></script>
+        <script src="js/user.js"></script>
+        <script src="js/upload.js"></script>
+
+        </body>
+    </html>

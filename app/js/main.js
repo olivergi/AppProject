@@ -61,6 +61,16 @@
     $(document).ready(function(){
 
 		owlCrouselFeatureSlide();
+        $('#fileSelected').hide();
+        
+        //Checks the upload modal for file
+        $(fileBrowse).on('change','#uploadBox' , function(){
+            if(document.getElementById("uploadBox").value != "") {
+                $('#fileSelected').show();
+            } else {
+                $('#fileSelected').hide();
+            }
+        });
 
 	});
 

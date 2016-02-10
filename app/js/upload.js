@@ -40,7 +40,7 @@ angular.module('theApp')
             console.log("file uploaded: " + JSON.stringify(response.data));
         }, function (error) {
             $('#upFailed').show();
-            console.log("oh dog: " + error.data);
+            console.log("Error:" + error.data);
         });
     };
 

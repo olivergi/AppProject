@@ -23,8 +23,17 @@ body {
   position: relative;
 }
 
+#fileSelected {
+    color: #66CC66;
+}
+
 .registration{
     display:none;
+    font-size: 14px;
+}
+
+.login {
+    font-size: 14px;
 }
 
 audio{

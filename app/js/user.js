@@ -78,6 +78,8 @@ angular.module('theApp')
 	});
 
 $(document).ready(function(){
+    
+    $('.registration').hide();
 
     $("#loginbtn").click(function(){
         $("#loginModal").modal();

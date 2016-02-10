@@ -51,39 +51,39 @@ angular.module('theApp', [])
     
 $scope.showMore = function() {
 
-$http({
-        method: 'GET',
-        url: 'http://util.mw.metropolia.fi/ImageRekt/api/v2/files'
-    }).then(function successCallback(response) {
-        var newValue = imagesCount + 10;
+    $http({
+            method: 'GET',
+            url: 'http://util.mw.metropolia.fi/ImageRekt/api/v2/files'
+        }).then(function successCallback(response) {
+            var newValue = imagesCount + 10;
 
-        for (var i = imagesCount; i < newValue; i++) {
+            for (var i = imagesCount; i < newValue; i++) {
 
-        imagesCount +=1;
-        if (response.data[i] == null){
-                $('#outofpics').show();
-                $('#showMore').hide();
-                break;
-            } else if(response.data[i].type == 'image'){
-                angular.element(document.getElementById('gallery')).append('<img width="100%" height="100%" src="http://util.mw.metropolia.fi/uploads/' + response.data[i].path + '"> <br>' +
-                "<p class='imgTitle'>" + response.data[i].title + "</p>");
-            } else if (response.data[i].type == 'video'){
-                angular.element(document.getElementById('gallery')).append("<video width='100%' height='100%' controls><br> <source src='http://util.mw.metropolia.fi/uploads/" + response.data[i].path + "' type='"+ response.data[i].mimeType + "' > </video><br>" +
-                "<p class='imgTitle'>" + response.data[i].title + "</p>");
-            } else if (response.data[i].type == 'audio'){
-                angular.element(document.getElementById('gallery')).append("<audio controls><br> <source src='http://util.mw.metropolia.fi/uploads/" + response.data[i].path + "' type='" + response.data[i].mimeType + "'' > </audio><br>" +
-                "<p class='imgTitle'>" + response.data[i].title + "</p>");
-            }
-        } 
+            imagesCount +=1;
+            if (response.data[i] == null){
+                    $('#outofpics').show();
+                    $('#showMore').hide();
+                    break;
+                } else if(response.data[i].type == 'image'){
+                    angular.element(document.getElementById('gallery')).append('<img width="100%" height="100%" src="http://util.mw.metropolia.fi/uploads/' + response.data[i].path + '"> <br>' +
+                    "<p class='imgTitle'>" + response.data[i].title + "</p>");
+                } else if (response.data[i].type == 'video'){
+                    angular.element(document.getElementById('gallery')).append("<video width='100%' height='100%' controls><br> <source src='http://util.mw.metropolia.fi/uploads/" + response.data[i].path + "' type='"+ response.data[i].mimeType + "' > </video><br>" +
+                    "<p class='imgTitle'>" + response.data[i].title + "</p>");
+                } else if (response.data[i].type == 'audio'){
+                    angular.element(document.getElementById('gallery')).append("<audio controls><br> <source src='http://util.mw.metropolia.fi/uploads/" + response.data[i].path + "' type='" + response.data[i].mimeType + "'' > </audio><br>" +
+                    "<p class='imgTitle'>" + response.data[i].title + "</p>");
+                }
+            } 
 
-    }, function errorCallback(response) {
-        angular.element(document.getElementById('contents')).append(response.data);
+        }, function errorCallback(response) {
+            angular.element(document.getElementById('contents')).append(response.data);
+        });
+
+    }
+
     });
 
-}
-
-});
-    
 
 
 $(document).ready(function(){
@@ -91,8 +91,7 @@ $(document).ready(function(){
      $("#owlSlider").owlCarousel();
     
     /* Hiding some stuff */
-    $('#upSuccess, #upFailed').hide();
-    $('.registration').hide();
+    // $('#upSuccess, #upFailed').hide();
 
     /*
         Button click function to open a pop-up window
