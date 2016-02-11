@@ -1,0 +1,15 @@
+<div ng-hide="showchistory">
+    <h3 style="text-align: center">COMMENTS</h3>
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="comment in comments track by $index"><span ng-click="showCommentHistory(comment.userId, comment.username)" style="color: #000">{{ comment.username }}</span><span style="font-size: 12px"> | {{ comment.time }}</span><br>{{ comment.text }}</li>
+    </ul>
+</div>
+
+<div ng-show="showchistory">
+    <h3 style="text-align: center">{{ name }}'s comment history</h3>
+    <h6 style="text-align: center" ng-click="hideCommentHistory()"><< BACK TO MAIN COMMENTS</h6>
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="comment in chistory track by $index"><span style="color: #000">{{ comment.username }}</span><span style="font-size: 12px"> | {{ comment.onfile }} | {{ comment.time }}</span><br>{{ comment.text }}</li>
+    </ul>
+    <h6 style="text-align: center" ng-click="hideCommentHistory()"><< BACK TO MAIN COMMENTS</h6>
+</div>

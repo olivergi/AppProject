@@ -60,11 +60,10 @@ angular.module('theApp')
 	                        
 	                        localStorage.setItem("userID", response.data.userId);
 	                        localStorage.setItem("username", uName);
-	                        $('#hamburger').click();
 
-	                        console.log("Login success?: " + JSON.stringify(response.data));
+	                        console.log("Login Success: " + JSON.stringify(response.data));
 	                    }, function (error) {
-	                        console.log("login oh dog: " + error.data);
+	                        console.log("login Error: " + error.data);
 	                    });
 	                } else {
 	                    console.log("what " + JSON.stringify(response.data));

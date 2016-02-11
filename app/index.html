@@ -54,7 +54,7 @@
 			<div class="container">
 			    <nav class="navbar navbar-default navbar-fixed-top">
 		        <div class="container navbar-header">
-		          	<a class="navbar-brand" href="index.html">Square</a> 
+		          	<a class="navbar-brand" href="index.html"><img src="images/SmallLogo.png" id="smallLogo"/>Square</a> 
                     <div id="navbar" class="navbar-enu">
                         <i class="glyphicon glyphicon-menu-up" data-toggle="modal" data-target="#uploadModal" ></i>
                         <i class="icon-user" data-toggle="modal" data-target="#loginModal" ></i>
@@ -144,9 +144,6 @@
                 </div>
               </div>
             </div>
-
-        
-        
         
         
         
@@ -168,6 +165,7 @@
                                 Browse... <input type="file" name="file" id="uploadBox" onchange="angular.element(this).scope().setMediaFile(this)">
                             </span>
                                 <i class="glyphicon glyphicon-ok" id="fileSelected"></i>
+                            <div id="upDiv"></div>
                             </br>
                         </form>
                       </div>
@@ -179,7 +177,7 @@
         </div>
         
      <!-- Gallery -->
-    <div class="container-fluid"> 
+    <div class="container-fluid" id="galleryContainer" ng-show="true"> 
         <div class="container">
             <div class="row">
         <div class="col-md-12" id="gallery">
@@ -191,6 +189,10 @@
         </div>
 
     </div>
+        
+    <!-- Single View -->    
+    <single id="single" file-id="-1" ng-show="false"></single>
+        
 
     <!-- Footer Containing icons -->
         <footer id="footer" role="contentinfo">
@@ -232,6 +234,26 @@
         <script src="js/gallery.js"></script>
         <script src="js/user.js"></script>
         <script src="js/upload.js"></script>
+        
+        <!-- Directives -->
+        <script type="text/javascript" src="directives/single.js"></script>
+        
+        
+        <script> showComments = function(fileId) {
+        
+        console.log("showComments" + fileId);
+        
+        angular.element(document.getElementById('single')).attr('fileId', fileId);
+        console.log("attr of single set to " + fileId);
+        angular.element(document.getElementById('single')).attr('ngShow', true);
+        console.log("Single ngShow set to true");
+        angular.element(document.getElementById('galleryContainer')).attr('ngShow', false);
+        console.log("GalleryContaing ngShow set to false" + document.getElementById('galleryContainer'));
+    
+        
+        };
+        
+        </script>
 
         </body>
     </html>

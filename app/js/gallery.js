@@ -3,9 +3,22 @@ angular.module('theApp', [])
 .controller('contentCtrl', function ($scope, $http) {
     var imagesCount = 0;
 
+    
+    $scope.showComments = function(fileId) {
+        
+        console.log("showComments");
+        
+        angular.element(document.getElementById('single')).attr('fileId', fileId);
+        angular.element(document.getElementById('single')).attr('ngShow', true);
+        angular.element(document.getElementById('galleryContainer')).attr('ngShow', false);
+    };
+    
+
     showImages = function() {
         
         var sliderarray = [];
+        
+        $scope.images= [];
         
         $http({
             method: 'GET',
@@ -21,7 +34,7 @@ angular.module('theApp', [])
                     
                     break;
                 } else if(response.data[i].type == 'image'){
-                    angular.element(document.getElementById('gallery')).append('<img width="100%" height="100%" src="http://util.mw.metropolia.fi/uploads/' + response.data[i].path + '"> <br>' +
+                    angular.element(document.getElementById('gallery')).append('<img width="100%" height="100%" onclick="showComments(' + response.data[i].fileId + ')" src="http://util.mw.metropolia.fi/uploads/' + response.data[i].path + '"> <br>' +
                     "<p class='imgTitle'>" + response.data[i].title + "</p>");
                     
                     
@@ -65,8 +78,13 @@ $scope.showMore = function() {
                     $('#showMore').hide();
                     break;
                 } else if(response.data[i].type == 'image'){
-                    angular.element(document.getElementById('gallery')).append('<img width="100%" height="100%" src="http://util.mw.metropolia.fi/uploads/' + response.data[i].path + '"> <br>' +
+                  angular.element(document.getElementById('gallery')).append('<img width="100%" height="100%" ng-click="showComments(' + response.data[i].fileId + ')" src="http://util.mw.metropolia.fi/uploads/' + response.data[i].path + '"> <br>' +
                     "<p class='imgTitle'>" + response.data[i].title + "</p>");
+                    
+                    /* $scope.images.push('<img width="100%" height="100%" src="http://util.mw.metropolia.fi/uploads/' + response.data[i].path + '"> <br>' + "<p class='imgTitle'>" + response.data[i].title + "</p>"); 
+                    
+                    console.log($scope.images); */
+                    
                 } else if (response.data[i].type == 'video'){
                     angular.element(document.getElementById('gallery')).append("<video width='100%' height='100%' controls><br> <source src='http://util.mw.metropolia.fi/uploads/" + response.data[i].path + "' type='"+ response.data[i].mimeType + "' > </video><br>" +
                     "<p class='imgTitle'>" + response.data[i].title + "</p>");

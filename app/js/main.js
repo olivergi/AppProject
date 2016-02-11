@@ -67,10 +67,13 @@
         $(fileBrowse).on('change','#uploadBox' , function(){
             if(document.getElementById("uploadBox").value != "") {
                 $('#fileSelected').show();
+                //angular.element(document.getElementById("upDiv")).append("<p>" + document.getElementById("uploadBox").value + "</p>");
             } else {
                 $('#fileSelected').hide();
             }
         });
+        
+        
 
 	});
 
