@@ -2,17 +2,9 @@ angular.module('theApp', [])
 
 .controller('contentCtrl', function ($scope, $http) {
     var imagesCount = 0;
-
     
-    $scope.showComments = function(fileId) {
-        
-        console.log("showComments");
-        
-        angular.element(document.getElementById('single')).attr('fileId', fileId);
-        angular.element(document.getElementById('single')).attr('ngShow', true);
-        angular.element(document.getElementById('galleryContainer')).attr('ngShow', false);
-    };
-    
+    $scope.galleryShow = true;
+    $scope.viewShow = false;
 
     showImages = function() {
         
@@ -100,6 +92,22 @@ $scope.showMore = function() {
 
     }
 
+   showComments = function(fileId) {
+        
+        console.log("showComments");
+        
+        angular.element(document.getElementById('single')).attr('file-id', fileId);
+        console.log(fileId);
+        //angular.element(document.getElementById('single')).attr('ngShow', true);
+        //angular.element(document.getElementById('galleryContainer')).attr('ngShow', false);
+        
+        $scope.$apply(function(){
+            $scope.galleryShow = false;
+            $scope.viewShow = true;
+            });
+    };
+    
+
     });
 
 
@@ -118,5 +126,6 @@ $(document).ready(function(){
         $("#uploadModal").modal();
     });
     showImages();
+    showComments(719);
 
 });
