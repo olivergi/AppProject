@@ -1,0 +1,6 @@
+<div class="container-fluid" ng-hide="visible">
+    <span ng-repeat="file in showing track by $index">
+        <img ng-click="toggleView($index)" width="100%" height="100%" ng-click="showComments()" src="http://util.mw.metropolia.fi/uploads/{{ file.path }}"/><br><h3 style="background:#eee;line-height:35px;margin-top: 0px;" class="imgTitle">{{ file.title }}</h3><br>
+    </span>
+    <button type="button" class="btn btn-primary btn-block" ng-click="showMore()" id="showMore">Show More</button>
+</div>

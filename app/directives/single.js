@@ -10,54 +10,73 @@ angular.module('theApp').directive('single', function($http) {
 			scope.showchistory = false;
 			scope.userId = -1;
 			scope.name = '';
+			scope.numComments = 0;
+			scope.title = 'loading...';
+            scope.filePath ='';
 
-			// Get comments
-			$http({
-				method: 'GET',
-				url: 'http://util.mw.metropolia.fi/ImageRekt/api/v2/comments'
-			}).then(function successCallback(response) {
+			// Updates list of comments and files from the server
+			var update = function() {
 
 				// Clear previous items
 				scope.allcomments.length = 0;
 				scope.comments.length = 0;
+				scope.title = "loading...";
 
-				// Rebuild the list
-				for (var z = 0; z < response.data.length; z++) {
-					var item = response.data[z];
-					scope.allcomments.push(item);
-					//console.log(item);
-					if (item.fileId == attrs.fileId) {
-						scope.comments.push({
-							username: item.username,
-							userId: item.userId,
-							text: item.comment,
-							time: item.time.substring(4, 16)
-						});
+				$http({
+					method: 'GET',
+					url: 'http://util.mw.metropolia.fi/ImageRekt/api/v2/comments'
+				}).then(function successCallback(response) {
+
+					// Rebuild the list
+					for (var z = 0; z < response.data.length; z++) {
+						var item = response.data[z];
+						scope.allcomments.push(item);
+						//console.log(item);
+						if ( /*item.fileId == attrs.which*/ z == attrs.which) {
+							scope.comments.push({
+								username: item.username,
+								userId: item.userId,
+								text: item.comment,
+								time: item.time.substring(4, 16)
+							});
+						}
 					}
-				}
 
-			}, function errorCallback(response) {
-				console.log("Error gettting comment data")
-			});
+					scope.numComments = scope.comments.length;
 
-			// Get list of files
-			$http({
-				method: 'GET',
-				url: 'http://util.mw.metropolia.fi/ImageRekt/api/v2/files'
-			}).then(function successCallback(response) {
+					// Account for the english language
+					if (scope.numComments == 0) {
+						scope.title = "NO COMMENTS";
+					} else if (scope.numComments == 1) {
+						scope.title = "1 COMMENT";
+					} else {
+						scope.title = scope.numComments + " COMMENTS";
+					}
 
-				// Clear previous items
-				scope.files.length = 0;
+				}, function errorCallback(response) {
+					console.log("Error gettting comment data")
+				});
 
-				// Rebuild the list
-				for (var z = 0; z < response.data.length; z++) {
-					var item = response.data[z];
-					scope.files.push(item);
-				}
+				// Get list of files
+				$http({
+					method: 'GET',
+					url: 'http://util.mw.metropolia.fi/ImageRekt/api/v2/files'
+				}).then(function successCallback(response) {
 
-			}, function errorCallback(response) {
-				console.log("Error gettting comment data")
-			});
+					// Clear previous items
+					scope.files.length = 0;
+
+					// Rebuild the list
+					for (var z = 0; z < response.data.length; z++) {
+						var item = response.data[z];
+						scope.files.push(item);
+                        //console.log("File Paths: " + item.path);
+					}
+
+				}, function errorCallback(response) {
+					console.log("Error gettting comment data")
+				});
+			};
 
 			// Returns file name, given fileId
 			getFileNameById = function(fileId) {
@@ -104,6 +123,15 @@ angular.module('theApp').directive('single', function($http) {
 			scope.hideCommentHistory = function() {
 				scope.showchistory = false;
 			}
+
+			scope.$watch('main', function(newValue, oldValue) {
+				// If view was toggled
+				if (newValue != oldValue) {
+					// Update the comments
+					update();
+				}
+			});
+
 		},
 		templateUrl: "/directives/single.html"
 	};

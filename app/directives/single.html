@@ -1,15 +1,17 @@
-<div ng-hide="showchistory">
-    <h3 style="text-align: center">COMMENTS</h3>
+<div class="container-fluid" ng-hide="showchistory">
+    <img width="100%" height="100%" src="http://util.mw.metropolia.fi/uploads/{{ filePath }}"/><br>
+    <h3 style="text-align: center">{{ title }}</h3>
     <ul class="list-group">
         <li class="list-group-item" ng-repeat="comment in comments track by $index"><span ng-click="showCommentHistory(comment.userId, comment.username)" style="color: #000">{{ comment.username }}</span><span style="font-size: 12px"> | {{ comment.time }}</span><br>{{ comment.text }}</li>
+        <button type="button" class="btn btn-primary btn-block" ng-click="toggleView()" id="back">Back To Gallery</button>
     </ul>
 </div>
 
-<div ng-show="showchistory">
+<div class="container-fluid" ng-show="showchistory">
     <h3 style="text-align: center">{{ name }}'s comment history</h3>
     <h6 style="text-align: center" ng-click="hideCommentHistory()"><< BACK TO MAIN COMMENTS</h6>
     <ul class="list-group">
         <li class="list-group-item" ng-repeat="comment in chistory track by $index"><span style="color: #000">{{ comment.username }}</span><span style="font-size: 12px"> | {{ comment.onfile }} | {{ comment.time }}</span><br>{{ comment.text }}</li>
     </ul>
-    <h6 style="text-align: center" ng-click="hideCommentHistory()"><< BACK TO MAIN COMMENTS</h6>
+    <button type="button" class="btn btn-primary btn-block" ng-click="hideCommentHistory()">Back To Picture Comments</button>
 </div>
