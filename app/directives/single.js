@@ -131,6 +131,19 @@ angular.module('theApp').directive('single', function($http) {
 					update();
 				}
 			});
+            
+            /*$http({
+	          method: 'POST',
+	          url: 'http://util.mw.metropolia.fi/ImageRekt/api/v2/comments',
+	          headers: {'Content-Type' : 'application/x-www-form-urlencoded'},
+	          data:$httpParamSerializer({
+                    username: localStorage.getItem('username'),
+                    userId: localStorage.getItem('userID'),
+                    comment: $('#comment').val(),
+                    fileId: ''
+                })
+            
+            });*/
 
 		},
 		templateUrl: "/directives/single.html"

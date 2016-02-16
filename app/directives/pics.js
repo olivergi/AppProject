@@ -1,4 +1,4 @@
-angular.module('theApp').directive('pics', function($http) {
+angular.module('theApp').directive('pics', function($http, $sce) {
 	return {
 		restrict: 'E',
 		link: function(scope, element, attrs) {
@@ -7,6 +7,11 @@ angular.module('theApp').directive('pics', function($http) {
             scope.videos = [];
             scope.audio = [];
 			scope.showing = [];
+            
+            scope.trustSrc = function(src) {
+            return $sce.trustAsResourceUrl(src);
+            };
+            
 
 			scope.showMore = function() {
 
@@ -34,23 +39,23 @@ angular.module('theApp').directive('pics', function($http) {
                     if (response.data[z] == null){
                         break;
                         
-                    } else if(response.data[z].type == 'image'){
-                        var item = response.data[z];
-                        scope.files.push(item);
+                    } else {
+                        //create new item from response data
+                        var item = {
+                        path: 'http://util.mw.metropolia.fi/uploads/' + response.data[z].path,
+                        title: response.data[z].title,
+                        type: response.data[z].type,
+                        //uploader: userArray[response.data[z].userId],
+                        mimetype: response.data[z].mimeType
                         
-                    } else if (response.data[z].type == 'video'){
-                        scope.videos.push(response.data[z]);
-                    
-                    } else if (response.data[z].type == 'audio'){
-                        scope.audio.push(response.data[z]);
-                    }
+                        };
+                        //add item to array
+                        scope.files.push(item);
+                    } 
                 }
 
 				// Show intial batch of 10
 				scope.showMore();
-                console.log("Videos: " + scope.videos);
-                console.log("Images: " + scope.files);
-                console.log("Audio: " + scope.audio);
 
 			}, function errorCallback(response) {
 				console.log("Error gettting data")

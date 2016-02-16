@@ -19,7 +19,6 @@ angular.module('theApp')
 	        }).then(function (response) {
 	            $scope.signIn($('#rusername').val(), $('#rpassword').val());
 	            $('#registerSuccess').show();
-	            $('#hamburger').click();
 
 	            console.log("Registration success?: \n" + response.data);
 	        }, function (error) {
