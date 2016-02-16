@@ -22,8 +22,8 @@ angular.module('theApp')
 
 	            console.log("Registration success?: \n" + response.data);
 	        }, function (error) {
-	            // to do = alert that username already exists
-	            console.log("oh dog: " + error.data);
+	            
+	            console.log("Error: " + error.data);
 	        });
 	    };
 

@@ -1,4 +1,4 @@
-angular.module('theApp').directive('single', function($http) {
+angular.module('theApp').directive('single', function($http, $httpParamSerializer) {
 	return {
 		restrict: 'E',
 		link: function(scope, element, attrs) {
@@ -12,7 +12,7 @@ angular.module('theApp').directive('single', function($http) {
 			scope.name = '';
 			scope.numComments = 0;
 			scope.title = 'loading...';
-            scope.filePath ='';
+            scope.newfileId ='';
 
 			// Updates list of comments and files from the server
 			var update = function() {
@@ -33,6 +33,10 @@ angular.module('theApp').directive('single', function($http) {
 						scope.allcomments.push(item);
 						//console.log(item);
 						if ( /*item.fileId == attrs.which*/ z == attrs.which) {
+                            //Debugging - Comments not working correctly!
+                            console.log(z);
+                            console.log(item.fileId);
+                            scope.newfileId = item.fileId;
 							scope.comments.push({
 								username: item.username,
 								userId: item.userId,
@@ -132,19 +136,29 @@ angular.module('theApp').directive('single', function($http) {
 				}
 			});
             
-            /*$http({
-	          method: 'POST',
-	          url: 'http://util.mw.metropolia.fi/ImageRekt/api/v2/comments',
-	          headers: {'Content-Type' : 'application/x-www-form-urlencoded'},
-	          data:$httpParamSerializer({
-                    username: localStorage.getItem('username'),
-                    userId: localStorage.getItem('userID'),
-                    comment: $('#comment').val(),
-                    fileId: ''
-                })
+            scope.postComment = function() {
             
-            });*/
+            $http({
+	          method: 'POST',
+	          url: 'http://util.mw.metropolia.fi/ImageRekt/api/v2/comment/file/' + scope.newfileId,
+	          headers: {'Content-Type' : 'application/x-www-form-urlencoded'},
+	          data: $httpParamSerializer({
+                    //username: localStorage.getItem('username'),
+                    user: localStorage.getItem('userID'),
+                    comment: $('#comment').val()
+                    //fileId: $('#id').val()
+                })
+                //Post Method NOT working correctly, Error in connection!
+            
+            }).then(function (response) {
+	            $('#commentSuccess').show();
 
+	            console.log("Comment success?: \n" + response.data);
+	        }, function (error) {
+	            
+	            console.log("Error: " + error.data);
+	        });
+            }
 		},
 		templateUrl: "/directives/single.html"
 	};
