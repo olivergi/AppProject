@@ -1,4 +1,6 @@
-angular.module('theApp').directive('single', function($http, $httpParamSerializer) {
+'use strict';
+
+angular.module('theApp').directive('single', function($http, $httpParamSerializer, $sce) {
 	return {
 		restrict: 'E',
 		link: function(scope, element, attrs) {
@@ -13,16 +15,63 @@ angular.module('theApp').directive('single', function($http, $httpParamSerialize
 			scope.numComments = 0;
 			scope.title = 'loading...';
             scope.newfileId ='';
+            scope.filePath = '';
+            scope.fileType = '';
+            scope.mimeType = '';
+            
+            scope.trustSrc = function(src) {
+            return $sce.trustAsResourceUrl(src);
+            };
+            
 
 			// Updates list of comments and files from the server
-			var update = function() {
+			scope.update = function() {
 
 				// Clear previous items
-				scope.allcomments.length = 0;
-				scope.comments.length = 0;
+				scope.allcomments = [];
+				scope.comments = [];
 				scope.title = "loading...";
+                scope.newfileId = '';
+                
+				// Get list of files
+                $http({
+					method: 'GET',
+					url: 'http://util.mw.metropolia.fi/ImageRekt/api/v2/files'
+				}).then(function successCallback(response) {
 
-				$http({
+					// Clear previous items
+					//scope.files.length = 0;
+
+					// Rebuild the list
+					for (var z = 0; z < response.data.length; z++) {
+						//var item = response.data[z];
+						//scope.files.push(item);
+                    if (z == attrs.which){    
+                    //if (scope.newfileId == response.data[z].fileId){
+                        //Get the Image to display in Comments.
+                        scope.filePath = "http://util.mw.metropolia.fi/uploads/" + response.data[z].path;
+                        scope.fileType = response.data[z].type;
+                        scope.newfileId = response.data[z].fileId;
+                        scope.mimeType = response.data[z].mimetype;
+                        console.log("File ID Success " + scope.newfileId);
+                        
+                        scope.getComments();
+                        
+                    } 
+                        
+					}
+                    
+                    
+
+				}, function errorCallback(response) {
+					console.log("Error gettting comment data")
+				});
+                
+            };
+            
+            scope.getComments = function () {
+            
+            $http({
 					method: 'GET',
 					url: 'http://util.mw.metropolia.fi/ImageRekt/api/v2/comments'
 				}).then(function successCallback(response) {
@@ -31,17 +80,20 @@ angular.module('theApp').directive('single', function($http, $httpParamSerialize
 					for (var z = 0; z < response.data.length; z++) {
 						var item = response.data[z];
 						scope.allcomments.push(item);
-						//console.log(item);
-						if ( /*item.fileId == attrs.which*/ z == attrs.which) {
+						console.log("Item Created");
+						if ( response.data[z].fileId == scope.newfileId ) {
+                            console.log("Attr Which " + attrs.which);
+                            console.log("ID " + item.fileId);
+                            console.log("New ID " + scope.newfileId);
                             //Debugging - Comments not working correctly!
                             console.log(z);
                             console.log(item.fileId);
-                            scope.newfileId = item.fileId;
 							scope.comments.push({
 								username: item.username,
 								userId: item.userId,
 								text: item.comment,
 								time: item.time.substring(4, 16)
+                            
 							});
 						}
 					}
@@ -60,30 +112,16 @@ angular.module('theApp').directive('single', function($http, $httpParamSerialize
 				}, function errorCallback(response) {
 					console.log("Error gettting comment data")
 				});
+                
+        };
 
-				// Get list of files
-				$http({
-					method: 'GET',
-					url: 'http://util.mw.metropolia.fi/ImageRekt/api/v2/files'
-				}).then(function successCallback(response) {
-
-					// Clear previous items
-					scope.files.length = 0;
-
-					// Rebuild the list
-					for (var z = 0; z < response.data.length; z++) {
-						var item = response.data[z];
-						scope.files.push(item);
-                        //console.log("File Paths: " + item.path);
-					}
-
-				}, function errorCallback(response) {
-					console.log("Error gettting comment data")
-				});
-			};
+            
+            
+            
+            
 
 			// Returns file name, given fileId
-			getFileNameById = function(fileId) {
+			scope.getFileNameById = function(fileId) {
 
 				// Iterate through files
 				for (var z = 0; z < scope.files.length; z++) {
@@ -132,7 +170,7 @@ angular.module('theApp').directive('single', function($http, $httpParamSerialize
 				// If view was toggled
 				if (newValue != oldValue) {
 					// Update the comments
-					update();
+					scope.update();
 				}
 			});
             

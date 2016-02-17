@@ -3,6 +3,7 @@ angular.module('theApp').directive('pics', function($http, $sce) {
 		restrict: 'E',
 		link: function(scope, element, attrs) {
 
+            var imagesCount = 0;
 			scope.files = [];
             scope.videos = [];
             scope.audio = [];
@@ -14,15 +15,42 @@ angular.module('theApp').directive('pics', function($http, $sce) {
             
 
 			scope.showMore = function() {
-
-				var lowerLim = scope.showing.length;
-
-				for (var z = lowerLim; z < lowerLim + 10; z++) {
-					if (z < scope.files.length) {
-						scope.showing.push(scope.files[z]);
-					}
-				}
-			};
+                
+                $http({
+				method: 'GET',
+				url: 'http://util.mw.metropolia.fi/ImageRekt/api/v2/files'
+			     }).then(function successCallback(response) {
+                    var newValue = imagesCount + 10;
+                    
+                    for (var i = imagesCount; i < newValue; i++) {
+                    
+                        imagesCount +=1;
+                        if (response.data[i] == null){
+                            $('#outofpics').show();
+                            $('#showMore').hide();
+                            break;
+                    } else {
+                        
+                        var item = {
+                        path: 'http://util.mw.metropolia.fi/uploads/' + response.data[i].path,
+                        title: response.data[i].title,
+                        type: response.data[i].type,
+                        //uploader: userArray[response.data[z].userId],
+                        mimetype: response.data[i].mimeType,
+                        fileId: response.data[i].fileId
+                        
+                        };
+                        //add item to array
+                        scope.showing.push(item);
+                           
+                    } 
+                }
+                    
+                },
+                    function errorCallback(response) {
+                        console.log("Error gettting data");
+                    }
+			)};
 
 			// Get files from server
 			$http({
@@ -34,7 +62,7 @@ angular.module('theApp').directive('pics', function($http, $sce) {
 				scope.files.length = 0;
 
 				// Rebuild the list
-				for (var z = 0; z < response.data.length; z++) {
+				/* for (var z = 0; z < response.data.length; z++) {
                     
                     if (response.data[z] == null){
                         break;
@@ -52,13 +80,13 @@ angular.module('theApp').directive('pics', function($http, $sce) {
                         //add item to array
                         scope.files.push(item);
                     } 
-                }
+                } */
 
 				// Show intial batch of 10
 				scope.showMore();
 
 			}, function errorCallback(response) {
-				console.log("Error gettting data")
+				console.log("Error gettting data");
 			});
 		},
 		templateUrl: "/directives/pics.html"

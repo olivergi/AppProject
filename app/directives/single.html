@@ -1,5 +1,13 @@
 <div class="container-fluid" ng-hide="showchistory">
-    <img width="100%" height="100%" id="{{ fileId }}" ng-src="{{ filePath }}"/><br>
+    <div ng-if="fileType =='image'">
+    <img width="100%" height="100%" ng-src="{{ filePath }}"/><br>
+    </div>
+    <div ng-if="fileType =='video'">
+    <video width='100%' height='100%' controls><br> <source ng-src='{{ trustSrc(filePath) }}' type='{{ mimeType }}' > </video><br>
+    </div>
+    <div ng-if="fileType =='audio'">
+    <audio controls><br> <source ng-src='{{ trustSrc(filePath) }}' type='{{ mimeType }}' > </audio><br>
+    </div>
     <h3 style="text-align: center">{{ title }}</h3>
     <ul class="list-group">
         <li class="list-group-item" ng-repeat="comment in comments track by $index"><span ng-click="showCommentHistory(comment.userId, comment.username)" style="color: #000">{{ comment.username }}</span><span style="font-size: 12px"> | {{ comment.time }}</span><br>{{ comment.text }}</li> <br>
