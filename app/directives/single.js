@@ -18,6 +18,7 @@ angular.module('theApp').directive('single', function($http, $httpParamSerialize
             scope.filePath = '';
             scope.fileType = '';
             scope.mimeType = '';
+            scope.uploader = '';
             
             scope.trustSrc = function(src) {
             return $sce.trustAsResourceUrl(src);
@@ -55,6 +56,7 @@ angular.module('theApp').directive('single', function($http, $httpParamSerialize
                         scope.mimeType = response.data[z].mimetype;
                         console.log("File ID Success " + scope.newfileId);
                         
+                        //get Comments
                         scope.getComments();
                         
                     } 
@@ -190,6 +192,9 @@ angular.module('theApp').directive('single', function($http, $httpParamSerialize
             
             }).then(function (response) {
 	            $('#commentSuccess').show();
+                $('.comment').val('');
+                scope.comments = [];
+                scope.getComments();
 
 	            console.log("Comment success?: \n" + response.data);
 	        }, function (error) {
@@ -198,6 +203,6 @@ angular.module('theApp').directive('single', function($http, $httpParamSerialize
 	        });
             }
 		},
-		templateUrl: "/directives/single.html"
+		templateUrl: "directives/single.html"
 	};
 });

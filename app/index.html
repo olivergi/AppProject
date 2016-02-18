@@ -51,13 +51,19 @@
                 <div class="container navbar-header">
                     <a class="navbar-brand" href="index.html">Square</a>
                     <div id="navbar" class="navbar-enu">
-                        <i class="glyphicon glyphicon-menu-up" data-toggle="modal" data-target="#uploadModal" ></i>
-                        <i class="icon-user" data-toggle="modal" data-target="#loginModal" ></i>                
+                        <i class="glyphicon glyphicon-search" data-toggle="modal" data-target="#searchModal" ng-hide="hideUpload"></i>
+                        <i class="glyphicon glyphicon-menu-up" data-toggle="modal" data-target="#uploadModal" ng-hide="hideUpload"></i>
+                        <i class="icon-user" data-toggle="modal" id="logout" data-target="#loginModal" ng-hide="hideUpload" ng-click="userLogout()"></i>  
+                        <i class="icon-user" data-toggle="modal" data-target="#loginModal" ng-show="showLogIn"></i>                
                     </div>
                 </nav>
             </div>
+        <!-- Alert -->
+            <div class="alert alert-success fade in fixed-top navbar-fixed-top" data-dismiss="alert" id="upSuccess">
+                  <strong>Upload successful!</strong> 
+            </div>
         </header>
-        
+            
         <!-- Slideshow of images -->
         <div id="slider" data-section="home">
             <div id="owlSlider" class="owl-carousel owl-carousel-fullwidth">
@@ -100,6 +106,9 @@
             </div>
         </div>
         
+        
+        
+        
         <!-- Modal -->
         <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="loginCtrl">
             <div class="modal-dialog" role="document">
@@ -114,23 +123,23 @@
                     <div class="modal-body">
                         <div id="login" class="login">
                             <form id="loginForm">
-                                <input type="text" class="form-control" name="username"  id="lusername" value="" placeholder="Username" ><br>
-                                <input type="password" class="form-control" name="password" id="lpassword" value="" placeholder="Password"><br>
+                                <input type="text" class="form-control loginputs" name="username"  id="lusername" value="" placeholder="Username" ><br>
+                                <input type="password" class="form-control loginputs" name="password" id="lpassword" value="" placeholder="Password"><br>
                             </form>
                         </div>
                         <div id="register" class="registration">
                             <form id="registerForm">
-                                <input type="text" class="form-control" name="username" value="" placeholder="Username" id="rusername"><br>
-                                <input type="password" class="form-control" name="password" value="" placeholder="Password" id="rpassword"><br>
-                                <input type="text" class="form-control" name="email" value="" placeholder="E-mail address" id="remail">
+                                <input type="text" class="form-control reginputs" name="username" value="" placeholder="Username" id="rusername"><br>
+                                <input type="password" class="form-control reginputs" name="password" value="" placeholder="Password" id="rpassword"><br>
+                                <input type="text" class="form-control reginputs" name="email" value="" placeholder="E-mail address" id="remail">
                             </form>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <a href="#" class="login pull-left" id="regislink"> Don't have an account yet? Click here to register! </a>
                         <a href="#" class="registration pull-left" id="loginlink"> Already have an account? Sign in here! </a>
-                        <button  class="btn btn-default registration" ng-click="registerUser()" data-dismiss="modal">Register</button>
-                        <button  class="btn btn-default login" ng-click="signIn()" data-dismiss="modal">Sign in</button>
+                        <button id="regButton" class="btn btn-default registration" ng-click="registerUser()" data-dismiss="modal">Register</button>
+                        <button id="signButton" class="btn btn-default login" ng-click="signIn()" data-dismiss="modal">Sign in</button>
                     </div>
                 </div>
             </div>
@@ -163,10 +172,33 @@
                 </div>
             </div>
         </div>
+    
+    
+        <!-- Search Modal -->
+        <div id="searchModal" class="modal fade" role="dialog" ng-controller="uploadCtrl">
+            <div class="modal-dialog">
+                
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"><i class="glyphicon glyphicon-menu-up"></i></h4>
+                    </div>
+                    <div class="modal-body">
+                        <form id="searchByUserId">
+                            <input type="text" class="form-control" name="userid" type="text" value="6" ng-model="keyword">
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="searchFunction();">Search</button>
+                    </div>
+                </div>
+            </div>
+        </div>
         
     <!-- Gallery -->
      <div class="container-fluid" id="galleryContainer" style="margin-top: 20px;"> 
-        <div class="container col-md-12">
+        <div class="container col-md-4">
             <div class="row">
             <pics ng-show="main"></pics>
             </div>
@@ -215,7 +247,7 @@
     <script src="js/user.js"></script>
     <script src="js/upload.js"></script>
     <!-- DIRECTIVES -->
-    <script type="text/javascript" src="/directives/single.js"></script>
-    <script type="text/javascript" src="/directives/pics.js"></script>
+    <script type="text/javascript" src="directives/single.js"></script>
+    <script type="text/javascript" src="directives/pics.js"></script>
 </body>
 </html>

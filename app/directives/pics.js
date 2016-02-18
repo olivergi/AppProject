@@ -37,7 +37,8 @@ angular.module('theApp').directive('pics', function($http, $sce) {
                         type: response.data[i].type,
                         //uploader: userArray[response.data[z].userId],
                         mimetype: response.data[i].mimeType,
-                        fileId: response.data[i].fileId
+                        fileId: response.data[i].fileId,
+                        thumbnail: 'http://util.mw.metropolia.fi/uploads/' + response.data[i].thumbNails.medium
                         
                         };
                         //add item to array
@@ -89,6 +90,6 @@ angular.module('theApp').directive('pics', function($http, $sce) {
 				console.log("Error gettting data");
 			});
 		},
-		templateUrl: "/directives/pics.html"
+		templateUrl: "directives/pics.html"
 	};
 });

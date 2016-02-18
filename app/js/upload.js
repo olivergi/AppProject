@@ -13,7 +13,7 @@ angular.module('theApp')
 
         var fd = new FormData(document.getElementById('uploadForm'));
         if (localStorage.getItem('username') != null){
-            fd.append('user', (localStorage.getItem('userID')-1));
+            fd.append('user', (localStorage.getItem('userID')));
         } else {
             console.log("user not logged in, can't upload media");
         }

@@ -23,6 +23,19 @@ body {
   position: relative;
 }
 
+.fixed-top {
+    margin-top: 70px;
+    padding-top: 15px;
+}
+
+#upSuccess {
+    display: none;
+}
+
+#logout {
+    color: #CC5050;
+}
+
 #smallLogo {
     float: left;
     margin-top: -12px;

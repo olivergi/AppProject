@@ -19,6 +19,8 @@ angular.module('theApp')
 	        }).then(function (response) {
 	            $scope.signIn($('#rusername').val(), $('#rpassword').val());
 	            $('#registerSuccess').show();
+                //$.showUpload();
+                location.reload();
 
 	            console.log("Registration success?: \n" + response.data);
 	        }, function (error) {
@@ -59,6 +61,8 @@ angular.module('theApp')
 	                        
 	                        localStorage.setItem("userID", response.data.userId);
 	                        localStorage.setItem("username", uName);
+                            //$.showUpload();
+                            location.reload();
 
 	                        console.log("Login Success: " + JSON.stringify(response.data));
 	                    }, function (error) {
@@ -66,6 +70,7 @@ angular.module('theApp')
 	                    });
 	                } else {
 	                    console.log("what " + JSON.stringify(response.data));
+                        $scope.userLoggedIn = false;
 	                }
 	            }, function (error) {
 	                console.log("user check oh dog: " + error.data);
