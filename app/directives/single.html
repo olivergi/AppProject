@@ -12,10 +12,10 @@
     <ul class="list-group">
         <li class="list-group-item" ng-repeat="comment in comments track by $index"><span ng-click="showCommentHistory(comment.userId, comment.username)" style="color: #000">{{ comment.username }}</span><span style="font-size: 12px"> | {{ comment.time }}</span><br>{{ comment.text }}</li> <br>
         
-        <form id="commentForm">
+        <form id="commentForm" ng-hide="hideUpload">
         <input type="text" class="form-control comment" name="comment" value="" placeholder="...." id="comment"><br>                            
         </form>
-        <button  class="btn btn-default comment btn-block" ng-click="postComment()">Comment</button>
+        <button class="btn btn-default comment btn-block" ng-click="postComment()" ng-hide="hideUpload" >Comment</button>
         <br>
         <button type="button" class="btn btn-primary btn-block" ng-click="toggleView()" id="back">Back To Gallery</button>
     </ul>

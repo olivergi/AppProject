@@ -18,9 +18,8 @@ angular.module('theApp')
 	                })
 	        }).then(function (response) {
 	            $scope.signIn($('#rusername').val(), $('#rpassword').val());
-	            $('#registerSuccess').show();
+                //location.reload();
                 //$.showUpload();
-                location.reload();
 
 	            console.log("Registration success?: \n" + response.data);
 	        }, function (error) {
@@ -37,19 +36,7 @@ angular.module('theApp')
 	            pWord = $('#lpassword').val();
 	        }
 
-	        // check if user exists
-	        $http({
-	              method: 'POST',
-	              url: 'http://util.mw.metropolia.fi/ImageRekt/api/v2/user/exists',
-	              headers: {'Content-Type' : 'application/x-www-form-urlencoded'},
-	              data: $httpParamSerializer({
-	                      username: uName
-	                    })
-	            }).then(function (response) {
-	                //if user is found
-	                if (JSON.stringify(response.data.userFound) == "true") {
-	                    //log user in
-	                    $http({
+	                   $http({
 	                      method: 'POST',
 	                      url: 'http://util.mw.metropolia.fi/ImageRekt/api/v2/login',
 	                      headers: {'Content-Type' : 'application/x-www-form-urlencoded'},
@@ -58,23 +45,33 @@ angular.module('theApp')
 	                              password: pWord
 	                            })
 	                    }).then(function (response) {
+                            
+                            if (response.data.status == 'login ok') {
 	                        
 	                        localStorage.setItem("userID", response.data.userId);
 	                        localStorage.setItem("username", uName);
-                            //$.showUpload();
-                            location.reload();
-
-	                        console.log("Login Success: " + JSON.stringify(response.data));
+                            
+                            $('#logSuccess').fadeIn();
+                            console.log("Login Success: " + JSON.stringify(response.data));
+                            setTimeout(function(){
+                                location.reload();
+                            }, 3000);   
+                                
+                                
+                            } else {
+                                console.log("Login Failed");
+                                console.log("Login Fail: " + JSON.stringify(response.data));
+                            $('#logFail').fadeIn();
+                            setTimeout(function(){
+                                $('#logFail').click();
+                            }, 5000);
+                            }
+                             
+                            
+                            
 	                    }, function (error) {
 	                        console.log("login Error: " + error.data);
 	                    });
-	                } else {
-	                    console.log("what " + JSON.stringify(response.data));
-                        $scope.userLoggedIn = false;
-	                }
-	            }, function (error) {
-	                console.log("user check oh dog: " + error.data);
-	            });
 
 	    };
 

@@ -58,10 +58,22 @@
                     </div>
                 </nav>
             </div>
-        <!-- Alert -->
+            
+            <!-- Upload Alert -->
             <div class="alert alert-success fade in fixed-top navbar-fixed-top" data-dismiss="alert" id="upSuccess">
-                  <strong>Upload successful!</strong> 
+                  <strong>Upload Successful!</strong> 
             </div>
+            
+            <!-- Registration Alert -->
+            <div class="alert alert-success fade in fixed-top navbar-fixed-top" data-dismiss="alert" id="logSuccess">
+                  <strong>Log In Successful!</strong> 
+            </div>
+            
+            <!-- Registration Alert -->
+            <div class="alert alert-success fade in fixed-top navbar-fixed-top" data-dismiss="alert" id="logFail">
+                  <strong>Incorrect Username or Password!</strong> 
+            </div>
+            
         </header>
             
         <!-- Slideshow of images -->
@@ -175,14 +187,14 @@
     
     
         <!-- Search Modal -->
-        <div id="searchModal" class="modal fade" role="dialog" ng-controller="uploadCtrl">
+        <div id="searchModal" class="modal fade" role="dialog" ng-controller="AjaxCtrl">
             <div class="modal-dialog">
                 
                 <!-- Modal content-->
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title"><i class="glyphicon glyphicon-menu-up"></i></h4>
+                        <h4 class="modal-title"><i class="glyphicon glyphicon-search"></i></h4>
                     </div>
                     <div class="modal-body">
                         <form id="searchByUserId">
@@ -197,7 +209,7 @@
         </div>
         
     <!-- Gallery -->
-     <div class="container-fluid" id="galleryContainer" style="margin-top: 20px;"> 
+    <div class="container-fluid" id="galleryContainer" style="margin-top: 20px;"> 
         <div class="container col-md-4">
             <div class="row">
             <pics ng-show="main"></pics>
@@ -206,6 +218,19 @@
         </div>
 
     </div>
+    
+    <!-- Search Results -->
+    <!-- <div class="container-fluid" id="galleryContainer" style="margin-top: 20px;" ng-controller="AjaxCtrl"> 
+        <div class="container col-md-4">
+            <div class="row">
+            <search ></search>
+            </div>
+
+        </div>
+
+    </div> -->
+    
+    
     
     <!-- Single image view (hidden by default) -->
     <single id="single" which="{{pos}}" ng-hide="main"></single>
@@ -249,5 +274,7 @@
     <!-- DIRECTIVES -->
     <script type="text/javascript" src="directives/single.js"></script>
     <script type="text/javascript" src="directives/pics.js"></script>
+    <script type="text/javascript" src="js/ajaxServices.js"></script>
+    <script type="text/javascript" src="js/ajaxController.js"></script>
 </body>
 </html>

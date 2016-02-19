@@ -33,8 +33,10 @@ angular.module('theApp')
                 setTimeout(function(){
                     $('#upSuccess').click();
                 }, 6000);
-            $('#hamburger').click();
             angular.element(document.getElementById('contents')).empty();
+                setTimeout(function(){
+                    location.reload();
+                }, 4000);
 
             console.log("file uploaded: " + JSON.stringify(response.data));
         }, function (error) {
