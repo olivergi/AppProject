@@ -17,6 +17,7 @@ angular.module('theApp').directive('single', function($http, $httpParamSerialize
             scope.newfileId ='';
             scope.filePath = '';
             scope.fileType = '';
+            scope.fileTitle = '';
             scope.mimeType = '';
             scope.uploader = '';
             
@@ -47,12 +48,13 @@ angular.module('theApp').directive('single', function($http, $httpParamSerialize
 					for (var z = 0; z < response.data.length; z++) {
 						//var item = response.data[z];
 						//scope.files.push(item);
-                    if (z == attrs.which){    
-                    //if (scope.newfileId == response.data[z].fileId){
+                    if (response.data[z].fileId == attrs.which){
+                        console.log(response.data[z].fileId);
                         //Get the Image to display in Comments.
                         scope.filePath = "http://util.mw.metropolia.fi/uploads/" + response.data[z].path;
                         scope.fileType = response.data[z].type;
                         scope.newfileId = response.data[z].fileId;
+                        scope.fileTitle = response.data[z].title;
                         scope.mimeType = response.data[z].mimetype;
                         console.log("File ID Success " + scope.newfileId);
                         

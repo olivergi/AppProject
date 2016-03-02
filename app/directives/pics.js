@@ -8,28 +8,30 @@ angular.module('theApp').directive('pics', function($http, $sce) {
             scope.videos = [];
             scope.audio = [];
 			scope.showing = [];
+            scope.limited = 10;
             
             scope.trustSrc = function(src) {
             return $sce.trustAsResourceUrl(src);
             };
             
+            scope.showMore = function() {
+                scope.limited += 10;
+            };
+            
 
-			scope.showMore = function() {
+			scope.load = function() {
                 
                 $http({
 				method: 'GET',
 				url: 'http://util.mw.metropolia.fi/ImageRekt/api/v2/files'
 			     }).then(function successCallback(response) {
-                    var newValue = imagesCount + 10;
+                        for( var i=0; i < response.data.length; i++) {
                     
-                    for (var i = imagesCount; i < newValue; i++) {
-                    
-                        imagesCount +=1;
                         if (response.data[i] == null){
                             $('#outofpics').show();
                             $('#showMore').hide();
                             break;
-                    } else {
+                        } else {
                         
                         var item = {
                         path: 'http://util.mw.metropolia.fi/uploads/' + response.data[i].path,
@@ -44,9 +46,8 @@ angular.module('theApp').directive('pics', function($http, $sce) {
                         //add item to array
                         scope.showing.push(item);
                            
-                    } 
-                }
-                    
+                        }
+                    }
                 },
                     function errorCallback(response) {
                         console.log("Error gettting data");
@@ -84,7 +85,7 @@ angular.module('theApp').directive('pics', function($http, $sce) {
                 } */
 
 				// Show intial batch of 10
-				scope.showMore();
+				scope.load();
 
 			}, function errorCallback(response) {
 				console.log("Error gettting data");

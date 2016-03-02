@@ -1,0 +1,50 @@
+<!-- Upload Modal -->
+<div id="uploadModal" class="modal fade" role="dialog" ng-controller="uploadCtrl">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><i class="glyphicon glyphicon-menu-up"></i></h4>
+            </div>
+            <div class="modal-body">
+                <form id="uploadForm">
+                    <input type="text" class="form-control" id="titleField" name="title" maxlength="25" placeholder="Title" ><br>
+                    <input type="text" class="form-control" name="description" placeholder="Description"><br>
+                    <span class="btn btn-default btn-file" id="fileBrowse">
+                        Browse... <input type="file" name="file" id="uploadBox" onchange="angular.element(this).scope().setMediaFile(this)">
+                    </span>
+                    <i class="glyphicon glyphicon-ok" id="fileSelected"></i>
+                    </br>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="uploadImage()">Upload</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Search Modal -->
+<div id="searchModal" class="modal fade" role="dialog" ng-controller="AjaxCtrl">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"><i class="glyphicon glyphicon-search"></i></h4>
+            </div>
+            <div class="modal-body">
+                <form id="searchByUserId">
+                    <input type="text" class="form-control" name="userid" type="text" value="6" ng-model="keyword">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="searchFunction();">Search</button>
+            </div>
+        </div>
+    </div>
+</div>
