@@ -2,7 +2,10 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,10 +13,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="" />
     <meta name="author" content="Square" />
- 
+
     <link rel="shortcut icon" href="favicon.ico">
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,600,400italic,700' rel='stylesheet' type='text/css'>
-    
+
     <!-- Animate.css -->
     <link rel="stylesheet" href="css/animate.css">
     <!-- Simple Line Icons -->
@@ -31,6 +34,7 @@
     <script src="js/respond.min.js"></script>
     <![endif]-->
 </head>
+
 <body ng-app="theApp" ng-controller="mainCtrl">
 
     <header role="banner" id="fh5co-header">
@@ -41,163 +45,168 @@
                     <div id="navbar" class="navbar-enu">
                         <i class="glyphicon glyphicon-search" data-toggle="modal" data-target="#searchModal" ng-hide="hideUpload"></i>
                         <i class="glyphicon glyphicon-menu-up" data-toggle="modal" data-target="#uploadModal" ng-hide="hideUpload"></i>
-                        <i class="icon-user" data-toggle="modal" id="logout" data-target="#loginModal" ng-hide="hideUpload" ng-click="userLogout()"></i>  
-                        <i class="icon-user" data-toggle="modal" data-target="#loginModal" ng-show="showLogIn"></i>                
+                        <i class="icon-user" data-toggle="modal" id="logout" data-target="#loginModal" ng-hide="hideUpload" ng-click="userLogout()"></i>
+                        <i class="icon-user" data-toggle="modal" data-target="#loginModal" ng-show="showLogIn"></i>
                     </div>
-                </nav>
+            </nav>
             </div>
-            
+
             <!-- Upload Alert -->
             <div class="alert alert-success fade in fixed-top navbar-fixed-top" data-dismiss="alert" id="upSuccess">
-                  <strong>Upload Successful!</strong> 
+                <strong>Upload Successful!</strong>
             </div>
-            
+
             <!-- Registration Alert -->
             <div class="alert alert-success fade in fixed-top navbar-fixed-top" data-dismiss="alert" id="logSuccess">
-                  <strong>Log In Successful!</strong> 
+                <strong>Log In Successful!</strong>
             </div>
-            
+
             <!-- Registration Alert -->
             <div class="alert alert-success fade in fixed-top navbar-fixed-top" data-dismiss="alert" id="logFail">
-                  <strong>Incorrect Username or Password!</strong> 
+                <strong>Incorrect Username or Password!</strong>
             </div>
-            
-        </header>
-        
-        <!-- Slideshow of images - CANNOT be made into Directive! -->
-        <div id="slider" data-section="home">
-            <div id="owlSlider" class="owl-carousel owl-carousel-fullwidth">
-                <!-- Background color here. -->
-                <div class="item" style="background: #66CC66;">
-                    <div class="container" style="position: relative;">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="col-md-8 to-animate-2" id="slider1">
-                                    <img src="images/Slider-logo.png" style="max-width: 400px; margin-left: auto; display: block; margin-right:auto; paading-top: 60px;"/>
-                                </div>
-                            </div>
+
+    </header>
+
+    <!-- Slideshow of images - CANNOT be made into Directive! -->
+    <div id="slider" data-section="home">
+        <div id="owlSlider" class="owl-carousel owl-carousel-fullwidth">
+            <!-- Background color here. -->
+            <div class="item" style="background: #66CC66;">
+                <div class="container" style="position: relative;">
+                    <div class="row">
+
+                        <div class="to-animate-2" id="slider1">
+                            <img src="images/Slider-logo.png" style="max-width: 400px; margin-left: auto; display: block; margin-right:auto; paading-top: 60px;" />
                         </div>
-                    </div>
-                </div> 
-                <!-- Background color here. -->  
-                <div class="item" style="background: #66CC66;">
-                    <div class="container" style="position: relative;">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="col-md-8 to-animate-2" id="slider2">
-                                    <img src="images/SliderText.png" style="max-width: 400px; margin-left: auto; display: block; margin-right:auto; paading-top: 60px;"/>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
-        </div> 
-        
-        
-        <!-- Modal -->
-        <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="loginCtrl">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span></button>
-                        
-                        <h4 class="modal-title login" id="myModalLabel"><i class="icon-user"></i></h4>
-                        <h4 class="modal-title registration" id="myModalLabel"><i class="icon-user"></i></h4>
-                    </div>
-                    <div class="modal-body">
-                        <div id="login" class="login">
-                            <form id="loginForm">
-                                <input type="text" class="form-control loginputs" name="username"  id="lusername" value="" placeholder="Username" ><br>
-                                <input type="password" class="form-control loginputs" name="password" id="lpassword" value="" placeholder="Password"><br>
-                            </form>
+            <!-- Background color here. -->
+            <div class="item" style="background: #66CC66;">
+                <div class="container" style="position: relative;">
+                    <div class="row">
+                        <div class="to-animate-2" id="slider2">
+                            <img src="images/SliderText.png" style="max-width: 400px; margin-left: auto; display: block; margin-right:auto; paading-top: 60px;" />
+
                         </div>
-                        <div id="register" class="registration">
-                            <form id="registerForm">
-                                <input type="text" class="form-control reginputs" name="username" value="" placeholder="Username" id="rusername"><br>
-                                <input type="password" class="form-control reginputs" name="password" value="" placeholder="Password" id="rpassword"><br>
-                                <input type="text" class="form-control reginputs" name="email" value="" placeholder="E-mail address" id="remail">
-                            </form>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="#" class="login pull-left" id="regislink"> Don't have an account yet? Click here to register! </a>
-                        <a href="#" class="registration pull-left" id="loginlink"> Already have an account? Sign in here! </a>
-                        <button id="regButton" class="btn btn-default registration" ng-click="registerUser()" data-dismiss="modal">Register</button>
-                        <button id="signButton" class="btn btn-default login" ng-click="signIn()" data-dismiss="modal">Sign in</button>
                     </div>
                 </div>
             </div>
         </div>
-                
-        <!-- Upload Modal -->
-        <div id="uploadModal" class="modal fade" role="dialog" ng-controller="uploadCtrl">
-            <div class="modal-dialog">
-                
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title"><i class="glyphicon glyphicon-menu-up"></i></h4>
+    </div>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" ng-controller="loginCtrl">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+
+                    <h4 class="modal-title login" id="myModalLabel"><i class="icon-user"></i></h4>
+                    <h4 class="modal-title registration" id="myModalLabel"><i class="icon-user"></i></h4>
+                </div>
+                <div class="modal-body">
+                    <div id="login" class="login">
+                        <form id="loginForm">
+                            <input type="text" class="form-control loginputs" name="username" id="lusername" value="" placeholder="Username">
+                            <br>
+                            <input type="password" class="form-control loginputs" name="password" id="lpassword" value="" placeholder="Password">
+                            <br>
+                        </form>
                     </div>
-                    <div class="modal-body">
-                        <form id="uploadForm">
-                            <input type="text" class="form-control" id="titleField" name="title" maxlength="25" placeholder="Title" ><br>
-                            <input type="text" class="form-control" name="description" placeholder="Description"><br>
-                            <span class="btn btn-default btn-file" id="fileBrowse">
+                    <div id="register" class="registration">
+                        <form id="registerForm">
+                            <input type="text" class="form-control reginputs" name="username" value="" placeholder="Username" id="rusername">
+                            <br>
+                            <input type="password" class="form-control reginputs" name="password" value="" placeholder="Password" id="rpassword">
+                            <br>
+                            <input type="text" class="form-control reginputs" name="email" value="" placeholder="E-mail address" id="remail">
+                        </form>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="login pull-left" id="regislink"> Don't have an account yet? Click here to register! </a>
+                    <a href="#" class="registration pull-left" id="loginlink"> Already have an account? Sign in here! </a>
+                    <button id="regButton" class="btn btn-default registration" ng-click="registerUser()" data-dismiss="modal">Register</button>
+                    <button id="signButton" class="btn btn-default login" ng-click="signIn()" data-dismiss="modal">Sign in</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upload Modal -->
+    <div id="uploadModal" class="modal fade" role="dialog" ng-controller="uploadCtrl">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><i class="glyphicon glyphicon-menu-up"></i></h4>
+                </div>
+                <div class="modal-body">
+                    <form id="uploadForm">
+                        <input type="text" class="form-control" id="titleField" name="title" maxlength="25" placeholder="Title">
+                        <br>
+                        <input type="text" class="form-control" name="description" placeholder="Description">
+                        <br>
+                        <span class="btn btn-default btn-file" id="fileBrowse">
                                 Browse... <input type="file" name="file" id="uploadBox" onchange="angular.element(this).scope().setMediaFile(this)">
                             </span>
-                            <i class="glyphicon glyphicon-ok" id="fileSelected"></i>
-                            </br>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="uploadImage()">Upload</button>
-                    </div>
+                        <i class="glyphicon glyphicon-ok" id="fileSelected"></i>
+                        </br>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="uploadImage()">Upload</button>
                 </div>
             </div>
         </div>
-    
-    
-        <!-- Search Modal -->
-        <div id="searchModal" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-                
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title"><i class="glyphicon glyphicon-search"></i></h4>
-                    </div>
-                    <div class="modal-body">
-                        <form id="searchByUserId">
-                            <input type="search" class="form-control" ng-model="searchBar">
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="searchFunction();">Search</button>
-                    </div>
+    </div>
+
+
+    <!-- Search Modal -->
+    <div id="searchModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><i class="glyphicon glyphicon-search"></i></h4>
+                </div>
+                <div class="modal-body">
+                    <form id="searchByUserId">
+                        <input type="search" class="form-control" ng-model="searchBar">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="searchFunction();">Search</button>
                 </div>
             </div>
         </div>
-        
+    </div>
+
     <!-- Gallery -->
-    <div class="container-fluid" id="galleryContainer" style="margin-top: 20px;"> 
+    <div class="container-fluid" id="galleryContainer" style="margin-top: 20px;">
         <div class="container col-md-4">
             <div class="row">
-            <!-- Gallery Images -->
-            <pics ng-show="main"></pics>
+                <!-- Gallery Images -->
+                <pics ng-show="main"></pics>
             </div>
 
         </div>
 
     </div>
-    
-    
+
+
     <!-- Single image view (hidden by default) -->
     <single id="single" which="{{pos}}" ng-hide="main"></single>
-    
+
     <!-- Footer Containing icons -->
     <footer id="footer" role="contentinfo">
         <div class="container">
@@ -241,4 +250,5 @@
     <script type="text/javascript" src="js/ajaxServices.js"></script>
     <script type="text/javascript" src="js/ajaxController.js"></script>
 </body>
+
 </html>
