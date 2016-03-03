@@ -16,9 +16,9 @@
         <br>
     </div>
     <h3 style="text-align: center">{{ fileTitle }}</h3>
-    <h3 style="text-align: center">{{ title }}</h3>
-    <button id="likeButton" type="button" class="btn btn-default btn-lg" ng-click="likeOrUnlike();" style="background-color: black">
+    <button id="likeButton" type="button" class="btn btn-default btn-lg" ng-click="likeOrUnlike();" ng-hide="hideUpload">
         <span class="glyphicon glyphicon-heart" aria-hidden="true"></span></button>
+    <h3 style="text-align: center">{{ title }}</h3>    
     <ul class="list-group">
         <li class="list-group-item" ng-repeat="comment in comments track by $index"><span ng-click="showCommentHistory(comment.userId, comment.username)" style="color: #000">{{ comment.username }}</span><span style="font-size: 12px"> | {{ comment.time }}</span>
             <br>{{ comment.text }}</li>

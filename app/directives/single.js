@@ -20,6 +20,7 @@ angular.module('theApp').directive('single', function ($http, $httpParamSerializ
             scope.fileTitle = '';
             scope.mimeType = '';
             scope.uploader = '';
+            scope.liked = false;
 
             scope.trustSrc = function (src) {
                 return $sce.trustAsResourceUrl(src);
@@ -34,6 +35,7 @@ angular.module('theApp').directive('single', function ($http, $httpParamSerializ
                 scope.comments = [];
                 scope.title = "loading...";
                 scope.newfileId = '';
+                scope.liked = false;
 
                 // Get list of files
                 $http({

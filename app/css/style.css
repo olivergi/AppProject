@@ -23,6 +23,12 @@ body {
   position: relative;
 }
 
+#likeButton {
+    background-color: #66CC66;
+    display: inline-block;
+    float: right;
+}
+
 .fixed-top {
     margin-top: 70px;
     padding-top: 15px;
