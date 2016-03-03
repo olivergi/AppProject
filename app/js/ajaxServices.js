@@ -110,6 +110,16 @@ angular.module('theApp')
                     return err;
                 });
         };
+    
+        ajaxFunctions.filesLikedByUser = function (args)    {
+            return $http.get(urlBase + 'likes/user/' + args)
+                .success(function (data) {
+                    return data;
+                })
+                .error(function (err) {
+                    return err;
+                }); 
+        }
 
 
         return ajaxFunctions;
