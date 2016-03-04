@@ -1,5 +1,6 @@
 var app = angular.module('theApp', []);
 
+// Main controller is applied to the body tag
 app.controller('mainCtrl', function($scope) {
     
     // True if main gallery is shown
@@ -7,19 +8,14 @@ app.controller('mainCtrl', function($scope) {
     // True if Upload button is hidden / User not Logged In
     $scope.hideUpload = true;
 
+    // Set to negative one initially in order to
     $scope.pos = -1;
 
-    $scope.toggleView = function(pos) {
-        console.log(pos);
-        $scope.pos = pos;
+    $scope.toggleView = function(fileId) {
+        $scope.pos = fileId;
         $scope.main = !($scope.main);
         console.log("View toggled");
     };
-    
-    // Global Function
-    /* $.showUpload = function() {
-            $scope.hideUpload = false;
-    } */
     
     if (localStorage.getItem('userID') != null){
         $scope.hideUpload = false;

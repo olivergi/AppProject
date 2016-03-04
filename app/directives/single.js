@@ -158,7 +158,7 @@ angular.module('theApp').directive('single', function ($http, $httpParamSerializ
                             username: item.username,
                             text: item.comment,
                             time: item.time.substring(4, 16),
-                            onfile: getFileNameById(item.fileId)
+                            onfile: scope.getFileNameById(item.fileId)
                         });
                     }
                 }
