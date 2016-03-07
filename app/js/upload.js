@@ -9,18 +9,22 @@ angular.module('theApp')
         $scope.type = $scope.mimeType.substr(0, 5);
     };
 
+    // Function to upload a file
     $scope.uploadImage = function () {
 
+        // Select the upload form and get it's form data
         var fd = new FormData(document.getElementById('uploadForm'));
         if (localStorage.getItem('username') != null){
+            // Include logged in user as the author of the file
             fd.append('user', (localStorage.getItem('userID')));
         } else {
             console.log("user not logged in, can't upload media");
         }
+        // Include info about the file type
         fd.append('type', $scope.type);
         fd.append('mime-type', $scope.mimeType);
         
-        //Post
+        // Post it to the server
         $http.post('http://util.mw.metropolia.fi/ImageRekt/api/v2/upload', fd, {
             transformRequest: angular.identity,
             headers: {
@@ -28,7 +32,7 @@ angular.module('theApp')
             }
         }).then(function (response) {
 
-            //if (response.data) /* equals to object or some other shit tbd --> success } else --> uploadfail*/
+                // If success
                 $('#upSuccess').fadeIn();
                 setTimeout(function(){
                     $('#upSuccess').click();
@@ -39,7 +43,8 @@ angular.module('theApp')
                 }, 4000);
 
             console.log("file uploaded: " + JSON.stringify(response.data));
-        }, function (error) {
+        }, function (error) { // An error occured
+            // Notify user
             $('#upFailed').show();
             console.log("Error:" + error.data);
         });

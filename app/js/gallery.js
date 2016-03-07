@@ -11,23 +11,25 @@ app.controller('mainCtrl', function($scope) {
     // Set to negative one initially in order to
     $scope.pos = -1;
 
+    // Function to switch between gallery and single view
     $scope.toggleView = function(fileId) {
         $scope.pos = fileId;
         $scope.main = !($scope.main);
         console.log("View toggled");
     };
     
+    // If the user is logged in, show uupload functionality
     if (localStorage.getItem('userID') != null){
         $scope.hideUpload = false;
         $scope.showLogIn = false;
         console.log('User Logged In: ' + localStorage.getItem('username'));
-    } else {
+    } else { // Otherwise hide it
         $scope.hideUpload = true;
         $scope.showLogIn = true;
         console.log('User Logged Out');
     }
     
-    
+    // Log the user out by deleting stored credentials
     $scope.userLogout = function() {
         localStorage.clear();
         location.reload();
@@ -53,18 +55,11 @@ app.controller('mainCtrl', function($scope) {
 
 $(document).ready(function() {
 
+	// Start the carousel
     $("#owlSlider").owlCarousel();
 
-    /* Hiding some stuff */
-    // $('#upSuccess, #upFailed').hide();
-
-    /*
-        Button click function to open a pop-up window
-    */
     $("#uploadbtn").click(function() {
         $("#uploadModal").modal();
     });
-    
-    //showImages();
 
 });

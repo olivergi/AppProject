@@ -1,10 +1,12 @@
 'use strict';
 
 angular.module('theApp')
+	// Define controller
 	.controller('loginCtrl', function ($scope, $http, $httpParamSerializer) {
 	    $scope.user = $('#lusername').val();
 	    $scope.pass = $('#lpassword').val();
 	    
+	    // Function to register a new user with the server
 	    $scope.registerUser = function () {
 
 	        $http({
@@ -12,6 +14,7 @@ angular.module('theApp')
 	          url: 'http://util.mw.metropolia.fi/ImageRekt/api/v2/register',
 	          headers: {'Content-Type' : 'application/x-www-form-urlencoded'},
 	          data: $httpParamSerializer({
+	          		// Get essential input from user
 	                  username: $('#rusername').val(),
 	                  email: $('#remail').val(),
 	                  password: $('#rpassword').val()
@@ -29,7 +32,6 @@ angular.module('theApp')
 	    };
 
 	    $scope.signIn = function (uName, pWord) {
-            //bad code
             
 	        if (uName == null){
 	            uName = $('#lusername').val();
@@ -46,8 +48,10 @@ angular.module('theApp')
 	                            })
 	                    }).then(function (response) {
                             
+                            // If login succeeded
                             if (response.data.status == 'login ok') {
 	                        
+	                        // Store the userId and username in the browser
 	                        localStorage.setItem("userID", response.data.userId);
 	                        localStorage.setItem("username", uName);
                             
@@ -58,18 +62,18 @@ angular.module('theApp')
                             }, 3000);   
                                 
                                 
-                            } else {
+                            } else { // Login failed
                                 console.log("Login Failed");
                                 console.log("Login Fail: " + JSON.stringify(response.data));
                             $('#logFail').fadeIn();
+                            // Tell the request to time out after 5 secs
                             setTimeout(function(){
                                 $('#logFail').click();
                             }, 5000);
                             }
                              
                             
-                            
-	                    }, function (error) {
+	                    }, function (error) { // There was an error
 	                        console.log("login Error: " + error.data);
 	                    });
 
@@ -77,6 +81,7 @@ angular.module('theApp')
 
 	});
 
+// Conditionally (depending on logged in status) display upload/signin/signout
 $(document).ready(function(){
     
     $('.registration').hide();
